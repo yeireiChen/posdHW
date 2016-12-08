@@ -60,6 +60,7 @@
 		<Unit filename="include/combMedia.h" />
 		<Unit filename="include/combMediaBuilder.h" />
 		<Unit filename="include/combShape.h" />
+		<Unit filename="include/setValueVisitor.h" />
 		<Unit filename="include/temp.h" />
 		<Unit filename="include/test.h" />
 		<Unit filename="include/textMedia.h" />
@@ -83,6 +84,7 @@
 		<Unit filename="src/combMedia.cpp" />
 		<Unit filename="src/combMediaBuilder.cpp" />
 		<Unit filename="src/combShape.cpp" />
+		<Unit filename="src/setValueVisitor.cpp" />
 		<Unit filename="src/temp.cpp" />
 		<Unit filename="src/test.cpp" />
 		<Unit filename="src/textMedia.cpp" />

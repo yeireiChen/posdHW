@@ -5,6 +5,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <map>
+#include <Media.h>
 
 class Cmd
 {
@@ -17,6 +19,7 @@ class Cmd
 
     private:
         //std::string cmd;
+        std::map<std::string,Media*> names;
 };
 
 #endif // CMD_H

@@ -151,6 +151,12 @@ save comboExclamation1 to "myShapes.txt"
 
 
 
+/*load test************************************************/
+
+load "myShapes.txt"
+
+
+
 
 
 
