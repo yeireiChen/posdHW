@@ -1,0 +1,158 @@
+def circle = Circle(2,1,1)
+
+
+def rectangle = Rectangle(1,2,3,4)
+
+
+def triangle = Triangle(0,0,3,0,0,4)
+
+
+
+
+/*********************************************/
+
+
+
+error triangle
+
+
+def triangle = Triangle(0,0,3,0,4,0)
+
+
+
+/**def  *******************************************/
+
+
+def circle = Circle(2,1,1)
+	//p=
+
+def rectangle = Rectangle(1,2,3,4)
+
+
+def comboExclamation = combo{circle,rectangle}
+
+
+
+
+
+/**perimeter   ,   area*******************************************/
+
+
+
+
+def circle = Circle(2,1,1)
+
+
+def rectangle = Rectangle(1,10,2,8)
+
+
+
+circle.area?
+
+circle.perimeter?
+
+
+rectangle.area?
+
+rectangle.perimeter?
+
+
+def comboExclamation = combo{circle,rectangle}
+
+
+comboExclamation.area?
+
+comboExclamation.perimeter?
+
+
+
+....................................................
+
+
+
+def cSmall = Circle(2,1,1)
+
+
+def rTall = Rectangle(1,10,2,8)
+
+
+rTall.area?
+
+def comboExclamation = combo{rTall,cSmall}
+
+comboExclamation.perimeter?
+
+
+
+
+/*add test************************************************/
+
+
+
+def cSmall = Circle(2,1,1)
+
+
+def comboExclamation1 = combo{cSmall}
+
+def rTall = Rectangle(1,10,2,8)
+
+add rTall to comboExclamation1 	//comMedia add shapeMedia
+
+
+
+.........................................
+
+
+
+def cSmall = Circle(2,1,1)	
+
+def combo = combo{cSmall}
+
+def rTall = Rectangle(1,10,2,8)
+
+def combo1 = combo{rTall}
+
+add combo to combo1		//combMedia add combMedia
+
+
+
+
+/*save test************************************************/
+
+
+
+def cSmall = Circle(2,1,1)
+	-->comboExclamation1{rTall cSmall }
+
+def rTall = Rectangle(1,10,2,8)
+
+def comboExclamation = combo{rTall,cSmall}
+
+save comboExclamation to "myShapes.txt"
+
+
+
+.................................
+
+
+
+def cSmall = Circle(2,1,1)	-->comboExclamation1{rTall combo{cSmall }}
+
+def comboExclamation = combo{cSmall}
+
+def rTall = Rectangle(1,10,2,8)
+
+def comboExclamation1 = combo{rTall}
+
+add comboExclamation to comboExclamation1
+
+save comboExclamation1 to "myShapes.txt"
+
+
+
+
+
+
+
+
+

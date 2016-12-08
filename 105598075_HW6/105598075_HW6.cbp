@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="105598075_HW6" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/105598075_HW6" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add library="cppunitlite/libCppUnitLite.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/105598075_HW6" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="cppunitlite/libCppUnitLite.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/AreaVisitor.h" />
+		<Unit filename="include/Circle.h" />
+		<Unit filename="include/Cmd.h" />
+		<Unit filename="include/DescriptionNameVisitor.h" />
+		<Unit filename="include/DescriptionVisitor.h" />
+		<Unit filename="include/Document.h" />
+		<Unit filename="include/Media.h" />
+		<Unit filename="include/MediaBuilder.h" />
+		<Unit filename="include/MediaDirector.h" />
+		<Unit filename="include/MediaVisitor.h" />
+		<Unit filename="include/Mydocument.h" />
+		<Unit filename="include/PerimeterVisitor.h" />
+		<Unit filename="include/Rectangle.h" />
+		<Unit filename="include/Shape.h" />
+		<Unit filename="include/ShapeMedia.h" />
+		<Unit filename="include/ShapeMediaBuilder.h" />
+		<Unit filename="include/Text.h" />
+		<Unit filename="include/Triangle.h" />
+		<Unit filename="include/TriangleC.h" />
+		<Unit filename="include/combMedia.h" />
+		<Unit filename="include/combMediaBuilder.h" />
+		<Unit filename="include/combShape.h" />
+		<Unit filename="include/temp.h" />
+		<Unit filename="include/test.h" />
+		<Unit filename="include/textMedia.h" />
+		<Unit filename="include/traceVisitor.h" />
+		<Unit filename="include/utShapes.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/AreaVisitor.cpp" />
+		<Unit filename="src/Circle.cpp" />
+		<Unit filename="src/Cmd.cpp" />
+		<Unit filename="src/DescriptionNameVisitor.cpp" />
+		<Unit filename="src/DescriptionVisitor.cpp" />
+		<Unit filename="src/MediaDirector.cpp" />
+		<Unit filename="src/Mydocument.cpp" />
+		<Unit filename="src/PerimeterVisitor.cpp" />
+		<Unit filename="src/Rectangle.cpp" />
+		<Unit filename="src/ShapeMedia.cpp" />
+		<Unit filename="src/ShapeMediaBuilder.cpp" />
+		<Unit filename="src/Text.cpp" />
+		<Unit filename="src/Triangle.cpp" />
+		<Unit filename="src/TriangleC.cpp" />
+		<Unit filename="src/combMedia.cpp" />
+		<Unit filename="src/combMediaBuilder.cpp" />
+		<Unit filename="src/combShape.cpp" />
+		<Unit filename="src/temp.cpp" />
+		<Unit filename="src/test.cpp" />
+		<Unit filename="src/textMedia.cpp" />
+		<Unit filename="src/traceVisitor.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
