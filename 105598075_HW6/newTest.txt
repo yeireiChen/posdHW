@@ -1,2 +1,2 @@
-combo(r(1 10 2 8) combo(c(2 1 1) )r(4 5 1 2) )
-comboExclamation1{rTall comboExclamation{cSmall }a }
+combo(r(1 10 2 8) c(2 1 1) c(2 1 10) )
+comboExclamation{rTall cSmall a }

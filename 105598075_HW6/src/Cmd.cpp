@@ -46,7 +46,6 @@ bool checkFileName(std::string fileName){
     }
     temp.push_back(temper);
 
-
     if(temp.size()==2){
         //std::cout << "correct fileName" << std::endl;
         //std::cout << "i(0) "<< temp.at(0) << std::endl;
@@ -59,9 +58,6 @@ bool checkFileName(std::string fileName){
         }
     }
     else{
-        /*for(int i=0;i<temp.size();i++)
-            std::cout << temp.at(i) << std::endl;*/
-
         std::cout << "error structure" << std::endl;
         return 0;
     }
@@ -88,7 +84,6 @@ void add(std::string addName,std::string combName,std::map<std::string,Media*> *
                 comb->second->add(a);
                 comb->second->accept(&dVisitor);
                 comb->second->accept(&dnVisitor);
-
                 std::cout << ">> " << combName << " = " << dnVisitor.getDescription() << "= " << dVisitor.getDescription()<<std::endl;
             }
             else{
@@ -104,7 +99,7 @@ void add(std::string addName,std::string combName,std::map<std::string,Media*> *
     }
 
 }
-void save (std::string funName,std::string fileName,std::map<std::string,Media*> *names){   //fileName doesn't check
+void save (std::string funName,std::string fileName,std::map<std::string,Media*> *names){
 
     std::map<std::string,Media*>::iterator it;
     std::string classN;
@@ -112,11 +107,6 @@ void save (std::string funName,std::string fileName,std::map<std::string,Media*>
     int last=0;
     DescriptionVisitor dVisitor;
     DescriptionNameVisitor dnVisitor;
-
-    /*std::cout << fileName << std::endl;
-    int last = fileName.size();
-    fileName = fileName.substr(1,last-2);
-    std::cout << fileName << std::endl;*/
 
     if(names->find(funName) == names->end()){
         std::cout << "not found" << std::endl;
@@ -170,8 +160,6 @@ void save (std::string funName,std::string fileName,std::map<std::string,Media*>
 void calculate(std::string funName,std::string method,std::map<std::string,Media*> *names){ //areaPerimeter.at(0),areaPerimeter.at(1),&names
 
     std::map<std::string,Media*>::iterator it;
-    //std::cout << funName << std::endl;
-    //std::cout << method << std::endl;
     std::string classN;
     AreaVisitor aVisitor;
     PerimeterVisitor pVisitor;
@@ -248,56 +236,33 @@ void split(std::string cmd ,std::vector<std::string> *s){   //- def a = Circle(2
     }
 }
 void splitBrackets(std::string func,std::queue<std::string> *name,std::queue<std::string> *checkSorC){
-
-    //std::cout << func << std::endl;
     char tab2[1024];
     std::string temp="";
     std::strcpy(tab2, func.c_str());
 
     for(int i=0;i<strlen(tab2);i++){    //split command
-
-        if(tab2[i]=='{' || tab2[i]==' ' || tab2[i]=='}'){   //tab2[i]=='{' || tab2[i]==' ' || tab2[i]=='}'
-
-            if(tab2[i]==' '){
+        if(tab2[i]=='{' || tab2[i]==' '){   //tab2[i]=='{' || tab2[i]==' ' || tab2[i]=='}'
+                //see { means comb  ////comboExclamation{cSmall cMale }
+            if(tab2[i]==' '){   //see ( means shape
                 //std::cout << "shape's -> " <<temp<< std::endl;
-                checkSorC->push("shape");
+                checkSorC->push(temp);
                 name->push(temp);
                 temp.clear();
             }
             else{
-                //std::cout << temp << std::endl;         //load "myShapes.txt"
-                checkSorC->push("combo");
+                //std::cout <<"--"<<temp << std::endl;         //load "myShapes.txt"
+                checkSorC->push(temp);
                 name->push(temp);
                 temp.clear();
             }
         }
-        else
-            temp+=tab2[i];
-
-        /*if(tab2[i]==' ' && tab2[i-1]==')')
-            continue;
-        else
-            temp+=tab2[i];
-
-
-        if (tab2[i]=='('){
-            vsequence.push_back(temp);
-            temp.clear();
+        else{
+            if(tab2[i]=='}')
+                continue;
+            else
+                temp+=tab2[i];
         }
-        else if (tab2[i]==')' && tab2[i+1]==' '){ //tab2[i]==')' && tab2[i+1]==' '
-            change = vsequence.back()+temp;
-            vsequence.pop_back();
-            vsequence.push_back(change);
-            temp.clear();
-        }
-        else if(tab2[i]==')'){
-            vsequence.push_back(temp);
-            temp.clear();
-        }*/
-
-
     }
-
 }
 void splitPoint(std::string number,std::vector<std::string> *s){    //a.area()?  b.perimeter()?
     std::string temp = number;
@@ -306,10 +271,6 @@ void splitPoint(std::string number,std::vector<std::string> *s){    //a.area()? 
     int first =0;
     int found ;// temp.find_first_of(")") -- > not found is -1
 
-    //std::cout << "number is " << temp<<std::endl;
-    //std::cout << "size is " << last <<std::endl;
-    //std::cout << "first appear is "<< temp.find_first_of(",") <<std::endl;
-
     if(temp.find_first_of(".")!=-1){
         while(temp.find_first_of(".")!=-1){
             //std::cout << "=============" <<std::endl;
@@ -317,7 +278,6 @@ void splitPoint(std::string number,std::vector<std::string> *s){    //a.area()? 
             temper = temp.substr(first,found-first);
             s->push_back(temper);
             //std::cout << "number is " << temper <<std::endl;
-
             temp = temp.substr(found+1,last-found);
             //std::cout << "last number is " << temp<<std::endl;
         }
@@ -334,10 +294,6 @@ void splitDot(std::string number,std::vector<std::string> *s){  //2,1,1
     int first =0;
     int found ;// temp.find_first_of(")") -- > not found is -1
 
-    //std::cout << "number is " << temp<<std::endl;
-    //std::cout << "size is " << last <<std::endl;
-    //std::cout << "first appear is "<< temp.find_first_of(",") <<std::endl;
-
     if(temp.find_first_of(",")!=-1){
         while(temp.find_first_of(",")!=-1){
             //std::cout << "=============" <<std::endl;
@@ -345,7 +301,6 @@ void splitDot(std::string number,std::vector<std::string> *s){  //2,1,1
             temper = temp.substr(first,found-first);
             s->push_back(temper);
             //std::cout << "number is " << temper <<std::endl;
-
             temp = temp.substr(found+1,last-found);
             //std::cout << "last number is " << temp<<std::endl;
         }
@@ -355,95 +310,35 @@ void splitDot(std::string number,std::vector<std::string> *s){  //2,1,1
         s->push_back(temp);
     }
 }
+void splitParameter(std::string formula,std::queue<std::string> *s){
+    //combo(c(2 1 1)  c(3 2 1) )
+    char tab2[1024];
+    std::string temp="";
+    std::strcpy(tab2, formula.c_str());
 
-void load(std::string fileName,std::map<std::string,Media*> *names){
-
-    std::ifstream ifs;
-    std::string temp=" ";
-    std::string topName;
-    std::vector<std::string> funS;
-    std::queue<std::string> funNames;
-    std::queue<std::string> checkSorC;
-    std::stack<MediaBuilder*> create;
-    int last;
-    MediaDirector md;
-
-    //std::string value;
-    //std::string nameTemp;
-
-    last = fileName.size();
-
-    if(fileName.at(0)=='"' && fileName.at(last-1)=='"'){
-        //std::cout << "correct " <<std::endl;
-        fileName = fileName.substr(1,last-2);
-
-        if(checkFileName(fileName)){
-            //std::cout << "Prepare to load "<<std::endl;
-
-            ifs.open(fileName,std::ifstream::in);
-            getline(ifs,temp);
-            funS.push_back(temp);
+    for(int i=0;i<strlen(tab2);i++){    //split command ////combo(c(2 1 1)  c(3 2 1) )
+        if(tab2[i]=='(' && tab2[i-1]=='o'){   //see o( means comb
+            s->push(temp);
             //std::cout << temp << std::endl;
-            while(!ifs.eof()){
-                getline(ifs,temp);
-                //std::cout << temp << std::endl;
-                funS.push_back(temp);
-                //std::this_thread::sleep_for(std::chrono::nanoseconds(1000));
-            }
-
-            //std::cout << funS.size() <<std::endl;
-            //for(int i=0;i<funS.size();i++)
-                //std::cout << funS.at(i) <<std::endl;
-
-            if(funS.size()==3 && funS.at(2).compare("")==0){  //comboExclamation{cSmall cMale }= combo(c(2 1 1)  c(3 2 1) )
-                splitBrackets(funS.at(1),&funNames,&checkSorC);
-
-                /*for(int i=0;i<=funNames.size();i++){
-                    std::cout << funNames.front() << " is a "<<checkSorC.front()<< std::endl;
-                    checkSorC.pop();
-                    funNames.pop();
-                }*/
-
-                /*************create Combo*************/
-                topName = funNames.front();
-                std::cout << "Name is ->>>>>>>>>>>>>>>>>> " << topName << std::endl;
-                md.setMediaBuilder(&create);
-                md.concrete(funS.at(0));    //0-> combo(c(2 1 1) c(3 2 1) )    1-> comboExclamation{cSmall cMale }=
-
-
-                DescriptionVisitor dc;
-                Media *a = create.top()->getMedia();
-                a->accept(&dc);
-                std::cout << dc.getDescription() << std::endl;
-
-                setValueVisitor sV(&funNames);
-                a->accept(&sV);
-
-                names->insert(MyPair(topName,a));
-                /**************************************/
-
-                /*************create shapeS*************/
-
-                //  checkSorC need to split combo(c(2 1 1) c(3 2 1) ) ·Ó¶¶§Ç
-
-            }
-            else if(funS.size()==3 && funS.at(1).compare("")==0){  //save shapeMedia
-
-            }
-            else{
-                std::cout << "error input parameter structure in file" << std::endl;
-            }
+            temp.clear();
+        }
+        else if(tab2[i]==')' && tab2[i+1]==' '){   //see )_ means shape
+            temp+=')';
+            s->push(temp);
+            //std::cout << temp << std::endl;
+            temp.clear();
         }
         else{
-            std::cout << "file name structure is wrong,-> " << fileName <<std::endl;
+            if(tab2[i]==' ' && tab2[i-1]==')')
+                continue;
+            else
+                temp+=tab2[i];
+
+            //std::cout << tab2[i] << std::endl;
         }
     }
-    else{
-        std::cout << fileName << "  prefer to add \" like follows, "<< " \""<<fileName<<"\" "<<std::endl;
-    }
+
 }
-
-
 void def(std::string name,std::string formula,std::map<std::string,Media*> *names){
 
     MediaDirector dc;
@@ -479,13 +374,8 @@ void def(std::string name,std::string formula,std::map<std::string,Media*> *name
             //std::cout << "Circle" <<std::endl;
             //std::cout << "number is " << number<<std::endl;
             splitDot(number,&numbers);
-            /*if(numbers.size()!=0) //show number
-            {
-                for(int i=0; i<numbers.size(); i++)
-                    std::cout << numbers.at(i) <<std::endl;
-            }*/
 
-            if(numbers.size()==3){
+            if(numbers.size()==3){  //circle(1,2,3)_3 parameters
                 //std::cout << "correct parameter structure in " << name << "->"<<typeN<<std::endl;
                 dc.buildShpae(typeN,&numbers,&shB);
                 Media *s = shB.getMedia();
@@ -511,15 +401,11 @@ void def(std::string name,std::string formula,std::map<std::string,Media*> *name
                 s->setName(name);
                 names->insert(MyPair(name,s));
                 std::cout << ">> "  << formula <<std::endl;
-                //std::cout << "create successuflly " << name << "->"<<typeN<<std::endl;
-
             }else{
                 std::cout << "error parameter structure in  " << name << "->"<< typeN<<std::endl;
             }
         }
         else if(typeN.compare("Triangle")==0){
-            //std::cout << "Triangle" <<std::endl;
-            //std::cout << "number is " << number<<std::endl;
             splitDot(number,&numbers);
 
             if(numbers.size()==6){
@@ -532,7 +418,7 @@ void def(std::string name,std::string formula,std::map<std::string,Media*> *name
                     std::cout << ">> "  << formula <<std::endl;
                     //std::cout << "create successuflly " << name << "->"<<typeN<<std::endl;
                 }catch(std::string s){
-                    std::cout << s<< std::endl;
+                    std::cout << s << std::endl;
                 }
             }else{
                 std::cout << "error parameter " << name << "->"<< typeN<<std::endl;
@@ -610,18 +496,171 @@ void def(std::string name,std::string formula,std::map<std::string,Media*> *name
     }
 }
 
+void load(std::string fileName,std::map<std::string,Media*> *names){
+
+    std::ifstream ifs;
+    std::string temp=" ";
+    std::string topName;
+    std::vector<std::string> funS;
+    std::queue<std::string> funNames;
+    std::queue<std::string> parameters;
+    std::queue<std::string> funNames2;
+    std::stack<MediaBuilder*> create;
+    std::vector<std::string> numbers;
+    MediaDirector md;
+    ShapeMediaBuilder shb;
+    Media *mda;
+    int last;
+
+    last = fileName.size();
+    if(fileName.at(0)=='"' && fileName.at(last-1)=='"'){
+        //std::cout << "correct " <<std::endl;
+        fileName = fileName.substr(1,last-2);
+
+        if(checkFileName(fileName)){ //"Prepare to load "
+
+            ifs.open(fileName,std::ifstream::in);
+            getline(ifs,temp);
+            funS.push_back(temp);
+            //std::cout << temp << std::endl;
+            while(!ifs.eof()){
+                getline(ifs,temp);
+                //std::cout << temp << std::endl;
+                funS.push_back(temp);
+                //std::this_thread::sleep_for(std::chrono::nanoseconds(1000));
+            }
+
+            if(funS.size()==3 && funS.at(2).compare("")==0){  //0-> combo(c(2 1 1) c(3 2 1) )    1-> comboExclamation{cSmall cMale }=
+                splitBrackets(funS.at(1),&funNames,&funNames2); //split comboExclamation{cSmall cMale } ,see { means combo,  see " " means shape
+                //names to set combo's name   name2 to new shape's name
+                /*for(int i=0;i<=funNames.size();i++){
+                    std::cout << funNames.front() << " is a "<<funNames2.front()<< std::endl;
+                    funNames2.pop();
+                    funNames.pop();
+                }*/
+
+
+                /*************create Combo*************/
+
+                topName = funNames.front();
+                //std::cout << "Name is ->>>>>>>>>>>>>>>>>> " << topName << std::endl;
+                md.setMediaBuilder(&create);
+                md.concrete(funS.at(0));    //0-> combo(c(2 1 1) c(3 2 1) )    1-> comboExclamation{cSmall cMale }=
+
+                mda = create.top()->getMedia();
+
+                setValueVisitor sV(&funNames);
+                mda->accept(&sV);
+
+                DescriptionVisitor dc;
+                DescriptionNameVisitor dvN;
+
+                mda->accept(&dc);
+                mda->accept(&dvN);
+                std::cout << topName <<" = "<<dvN.getDescription()<<" = "<< dc.getDescription()  << std::endl;
+
+                names->insert(MyPair(topName,mda));
+                /**************************************/
+
+                /*************create shapeS**********funNames and ***/      //load "myShapes.txt"
+                //  checkSorC need to split combo(c(2 1 1) c(3 2 1) )
+
+                splitParameter(funS.at(0),&parameters);
+
+                //std::cout << "-------------------" <<std::endl;
+                int counter = parameters.size();
+                int strSize;
+                std::string newStr="";
+                for(int i=0;i<counter;i++){
+                    //std::cout << parameters.front() << std::endl;
+                    //strSize = parameters.front().size();
+
+                    if(parameters.front().compare("combo")==0){
+                        funNames2.pop();
+                        parameters.pop();
+                        continue;
+                    }else if (parameters.front().find("c")==0){
+                        //std::cout << ",file name is " << funNames2.front() << "  "<< parameters.front() << std::endl;
+                        strSize = parameters.front().size();
+                        //std::cout << parameters.front() << std::endl;
+                        newStr=parameters.front().substr(2,strSize-3);
+                        //std::cout << newStr << std::endl;
+
+                        split(newStr,&numbers);
+                        /*for(int i=0;i<numbers.size();i++)
+                            std::cout << numbers.at(i) << std::endl;*/
+
+                        md.buildShpae("Circle",&numbers,&shb);
+                        mda=shb.getMedia();
+                        mda->setName(funNames2.front());
+                        names->insert(MyPair(funNames2.front(),mda));
+                        numbers.clear();
+
+                    }else if (parameters.front().find("r")==0){
+                        //std::cout << "file name is " << funNames2.front() << "  "<< parameters.front() << std::endl;
+                        strSize = parameters.front().size();
+
+                        //std::cout << parameters.front() << std::endl;
+                        newStr=parameters.front().substr(2,strSize-3);
+                        //std::cout << newStr << std::endl;
+
+                        split(newStr,&numbers);
+                        /*for(int i=0;i<numbers.size();i++)
+                            std::cout << numbers.at(i) << std::endl;*/
+
+                        md.buildShpae("Rectangle",&numbers,&shb);
+                        mda=shb.getMedia();
+                        mda->setName(funNames2.front());
+                        names->insert(MyPair(funNames2.front(),mda));
+                        numbers.clear();
+                    }
+                    else{   //Triangle
+                        //std::cout << "t file name is " << funNames2.front() << "  "<< parameters.front() << std::endl;
+                        strSize = parameters.front().size();
+                        newStr=parameters.front().substr(2,strSize-3);
+                        //std::cout << newStr << std::endl;
+
+                        split(newStr,&numbers);
+                        /*for(int i=0;i<numbers.size();i++)
+                            std::cout << numbers.at(i) << std::endl;*/
+
+                        md.buildShpae("Rectangle",&numbers,&shb);
+                        mda=shb.getMedia();
+                        mda->setName(funNames2.front());
+                        names->insert(MyPair(funNames2.front(),mda));
+                        numbers.clear();
+                    }
+                    funNames2.pop();
+                    parameters.pop();
+                    newStr.clear();
+
+                }
+
+            }
+            else if(funS.size()==3 && funS.at(1).compare("")==0){  //save shapeMedia
+
+            }
+            else{
+                std::cout << "error input parameter structure in file" << std::endl;
+            }
+        }
+        else{
+            std::cout << "file name structure is wrong,-> " << fileName <<std::endl;
+        }
+    }
+    else{
+        std::cout << fileName << "  prefer to add \" like follows, "<< " \""<<fileName<<"\" "<<std::endl;
+    }
+}
+
+
 
 void Cmd::run(){
 
     std::vector<std::string> cmds;
     std::vector<std::string> areaPerimeter;
     std::map<std::string,Media*>::iterator it;
-    //std::map<std::string,Media*> names;
     std::string cmd;
-
-    /*ShapeMedia *t = new ShapeMedia(new Circle(2,1,1));
-    t->setName("test1234");
-    names.insert(MyPair("test",t)); //upper for test in def-*/
 
     while(cmd!="exit"){
         std::cout << "enter cmd " <<std::endl<<":-";
@@ -638,11 +677,7 @@ void Cmd::run(){
                 cmds.clear();
                 continue;
             }
-            /*if(cmds.at(0).compare("-")!=0 && cmds.size()<2 && cmds.size()>5){
-                std::cout << "error syntax" <<std::endl;
-                cmds.clear();
-                continue;
-            }*/
+
             if(cmds.at(0).compare("def")==0){
                 if(cmds.at(2).compare("=")==0 && cmds.size()==4){
                     //std::cout << "Action is def" <<std::endl;
@@ -657,18 +692,33 @@ void Cmd::run(){
                 }
             }
             else if(cmds.at(0).compare("add")==0){
-                    if(cmds.size()==4 && cmds.at(2).compare("to")==0){
-                        //std::cout << "Action is add" <<std::endl;
-                        //std::cout << "==============" <<std::endl;
-                        add(cmds.at(1),cmds.at(3),&names);
-                    }
-                    else{
-                        std::cout << "error syntax at def structure" <<std::endl;
-                    }
+                if(cmds.size()==4 && cmds.at(2).compare("to")==0){
+                    //std::cout << "Action is add" <<std::endl;
+                    //std::cout << "==============" <<std::endl;
+                    add(cmds.at(1),cmds.at(3),&names);
+                }
+                else{
+                    std::cout << "error syntax at def structure" <<std::endl;
+                }
             }
             else if(cmds.at(0).compare("delete")==0){
-                std::cout << "Action is delete" <<std::endl;
-                std::cout << "================" <<std::endl;
+                //std::cout << "Action is delete" <<std::endl;
+                //std::cout << "================" <<std::endl;
+                if(cmds.size()==4 && cmds.at(2).compare("from")==0){    //delete a from combo
+
+                }
+                else if(cmds.size()==2){    //delete A
+                    if(names.find(cmds.at(1))!=names.end() ){
+                        it = names.find(cmds.at(1));
+                        names.erase(it);
+                    }
+                    else{
+                        std::cout << cmds.at(1) << " doesn't exist" <<std::endl;
+                    }
+                }
+                else{
+                    std::cout << "error syntax at delete structure" <<std::endl;
+                }
             }
             else if(cmds.at(0).compare("show")==0){
                 //std::cout << "Action is show" <<std::endl;
@@ -687,8 +737,8 @@ void Cmd::run(){
                 }
             }
             else if(cmds.at(0).compare("load")==0){
-                std::cout << "Action is load" <<std::endl;
-                std::cout << "==============" <<std::endl;
+                //std::cout << "Action is load" <<std::endl;
+                //std::cout << "==============" <<std::endl;
                 if(cmds.size()==2){
                     load(cmds.at(1),&names);
                 }
@@ -702,7 +752,6 @@ void Cmd::run(){
                     std::cout << "i(" << i <<")"<<areaPerimeter.at(i) << std::endl;
                 }*/
                 if(areaPerimeter.size()<=2){
-
                     if(names.find(areaPerimeter.at(0))==names.end()){  //not found obj's name
                         std::cout << areaPerimeter.at(0) <<" doesn't exist "<<std::endl;
                     }
@@ -713,7 +762,6 @@ void Cmd::run(){
                 }else{
                     std::cout << "error cmd structure - >" << cmds.at(0) << "   ,should be A.area? or A.perimeter?" << std::endl;
                 }
-
             }
         }
         std::cout << "----------------------------------------------" <<std::endl;
