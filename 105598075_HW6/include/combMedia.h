@@ -14,9 +14,11 @@ class combMedia:public Media
         double perimeter() const;
         void accept(MediaVisitor*);
         void add(Media*);
-        void removeMedia(Media*)const;
         std::string getName() const;
         void setName(std::string);
+        void removeMedia(Media* m);
+        std::vector<Media*> getMediaP();
+
 
     protected:
 

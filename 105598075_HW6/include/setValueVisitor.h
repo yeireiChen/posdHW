@@ -11,7 +11,7 @@
 class setValueVisitor:public MediaVisitor
 {
     public:
-        setValueVisitor(std::queue<std::string>*);
+        setValueVisitor(std::queue<std::string>*,std::map<std::string,Media*>*);
         virtual ~setValueVisitor();
         void visitShapeMedia(ShapeMedia*);
         void visitCombMedia(combMedia*,bool);
@@ -20,6 +20,7 @@ class setValueVisitor:public MediaVisitor
 
     private:
         std::queue<std::string> *names;
+        std::map<std::string,Media*> *nMap;
 };
 
 #endif // SETVALUEVISITOR_H

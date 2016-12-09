@@ -228,6 +228,7 @@ TEST(eleven,AreaVisitor){
     combMedia comb1;
     combMedia comb2;
 
+
     comb1.add(&sh1);
     comb1.add(&sh2);
     comb1.add(&sh3);

@@ -48,7 +48,9 @@ void combMedia::accept(MediaVisitor* visit){
 
 }
 
-
+std::vector<Media*> combMedia::getMediaP(){
+    return cMedia;
+}
 
 std::string combMedia::getName() const{
     return name;
@@ -58,61 +60,29 @@ void combMedia::setName(std::string n){
     name = n;
 }
 
-void combMedia::removeMedia(Media* t)const{
+void combMedia::removeMedia(Media* m){
 
 
-    DescriptionVisitor ds;
-    t->accept(&ds);
-    std::string deletxt = ds.getDescription();
-    //std::cout << deletxt << std::endl;
-
-    traceVisitor t1(deletxt);
-
-    int i=0;
-    //t1.visitCombMedia(this,true);
-    for (Media* m:cMedia){
-
-            //i = &m-&cMedia[0];
-            m->accept(&t1);
-
-            /*
-            if(t1.findOut()){
-                std::cout << "find out at"<< i <<std::endl;
-                //cMedia.erase(cMedia.begin()+i);
-                //cMedia.erase(std::remove(cMedia.begin(), cMedia.end(), m), cMedia.end());
+    int index=0;
+    for(int i=0;i<cMedia.size();i++){
+        try{
+            if(cMedia.at(i)==m){
+                std::cout << "delete" << std::endl;
+                //it = cMedia.at(i);
+                cMedia.erase(cMedia.begin()+index);
             }
-            else{
-                std::cout << "Not find out" <<std::endl;
-                i++;
-            }*/
+            else
+                cMedia.at(i)->removeMedia(m);
 
-            //std::cout << "____________" <<std::endl;
-
-
+        }catch(std::string a){
+            continue;
+        }
+        index++;
     }
-
-    /*
-    for (Media *m: cMedia){
-
-            m->accept(&t1);
-            if(t1.findOut()){
-                std::cout << "find out at"<< i <<std::endl;
-                cMedia.erase(std::remove(cMedia.begin(), cMedia.end(), m), cMedia.end());
-            }
-            else{
-                std::cout << "Not find out" <<std::endl;
-                i++;
-            }
-    }
-
-
-
-    */
-/*
-    DescriptionVisitor visit;
-
-    for (Media *m: cMedia){
-            m->accept(&visit);
-            std::cout << visit.getDescription() << std::endl;
-    }*/
 }
+
+/*std::vector<Media*> combMedia::getMediaP(){
+
+}*/
+
+

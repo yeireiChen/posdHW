@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "MediaVisitor.h"
+#include <vector>
 
 class Media{
 
@@ -17,6 +18,14 @@ public:
     virtual void add(Media*){
         throw std::string("Illegal: add on media");
     };
+
+    virtual void removeMedia(Media* m){
+        throw std::string("Illegal: remove on media");
+    }
+
+    virtual std::vector<Media*> getMediaP(){
+        throw std::string("Illegal: remove on media");
+    }
 
 };
 

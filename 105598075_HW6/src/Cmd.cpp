@@ -333,8 +333,6 @@ void splitParameter(std::string formula,std::queue<std::string> *s){
                 continue;
             else
                 temp+=tab2[i];
-
-            //std::cout << tab2[i] << std::endl;
         }
     }
 
@@ -533,12 +531,6 @@ void load(std::string fileName,std::map<std::string,Media*> *names){
             if(funS.size()==3 && funS.at(2).compare("")==0){  //0-> combo(c(2 1 1) c(3 2 1) )    1-> comboExclamation{cSmall cMale }=
                 splitBrackets(funS.at(1),&funNames,&funNames2); //split comboExclamation{cSmall cMale } ,see { means combo,  see " " means shape
                 //names to set combo's name   name2 to new shape's name
-                /*for(int i=0;i<=funNames.size();i++){
-                    std::cout << funNames.front() << " is a "<<funNames2.front()<< std::endl;
-                    funNames2.pop();
-                    funNames.pop();
-                }*/
-
 
                 /*************create Combo*************/
 
@@ -549,7 +541,7 @@ void load(std::string fileName,std::map<std::string,Media*> *names){
 
                 mda = create.top()->getMedia();
 
-                setValueVisitor sV(&funNames);
+                setValueVisitor sV(&funNames,names);
                 mda->accept(&sV);
 
                 DescriptionVisitor dc;
@@ -560,81 +552,6 @@ void load(std::string fileName,std::map<std::string,Media*> *names){
                 std::cout << topName <<" = "<<dvN.getDescription()<<" = "<< dc.getDescription()  << std::endl;
 
                 names->insert(MyPair(topName,mda));
-                /**************************************/
-
-                /*************create shapeS**********funNames and ***/      //load "myShapes.txt"
-                //  checkSorC need to split combo(c(2 1 1) c(3 2 1) )
-
-                splitParameter(funS.at(0),&parameters);
-
-                //std::cout << "-------------------" <<std::endl;
-                int counter = parameters.size();
-                int strSize;
-                std::string newStr="";
-                for(int i=0;i<counter;i++){
-                    //std::cout << parameters.front() << std::endl;
-                    //strSize = parameters.front().size();
-
-                    if(parameters.front().compare("combo")==0){
-                        funNames2.pop();
-                        parameters.pop();
-                        continue;
-                    }else if (parameters.front().find("c")==0){
-                        //std::cout << ",file name is " << funNames2.front() << "  "<< parameters.front() << std::endl;
-                        strSize = parameters.front().size();
-                        //std::cout << parameters.front() << std::endl;
-                        newStr=parameters.front().substr(2,strSize-3);
-                        //std::cout << newStr << std::endl;
-
-                        split(newStr,&numbers);
-                        /*for(int i=0;i<numbers.size();i++)
-                            std::cout << numbers.at(i) << std::endl;*/
-
-                        md.buildShpae("Circle",&numbers,&shb);
-                        mda=shb.getMedia();
-                        mda->setName(funNames2.front());
-                        names->insert(MyPair(funNames2.front(),mda));
-                        numbers.clear();
-
-                    }else if (parameters.front().find("r")==0){
-                        //std::cout << "file name is " << funNames2.front() << "  "<< parameters.front() << std::endl;
-                        strSize = parameters.front().size();
-
-                        //std::cout << parameters.front() << std::endl;
-                        newStr=parameters.front().substr(2,strSize-3);
-                        //std::cout << newStr << std::endl;
-
-                        split(newStr,&numbers);
-                        /*for(int i=0;i<numbers.size();i++)
-                            std::cout << numbers.at(i) << std::endl;*/
-
-                        md.buildShpae("Rectangle",&numbers,&shb);
-                        mda=shb.getMedia();
-                        mda->setName(funNames2.front());
-                        names->insert(MyPair(funNames2.front(),mda));
-                        numbers.clear();
-                    }
-                    else{   //Triangle
-                        //std::cout << "t file name is " << funNames2.front() << "  "<< parameters.front() << std::endl;
-                        strSize = parameters.front().size();
-                        newStr=parameters.front().substr(2,strSize-3);
-                        //std::cout << newStr << std::endl;
-
-                        split(newStr,&numbers);
-                        /*for(int i=0;i<numbers.size();i++)
-                            std::cout << numbers.at(i) << std::endl;*/
-
-                        md.buildShpae("Rectangle",&numbers,&shb);
-                        mda=shb.getMedia();
-                        mda->setName(funNames2.front());
-                        names->insert(MyPair(funNames2.front(),mda));
-                        numbers.clear();
-                    }
-                    funNames2.pop();
-                    parameters.pop();
-                    newStr.clear();
-
-                }
 
             }
             else if(funS.size()==3 && funS.at(1).compare("")==0){  //save shapeMedia
@@ -653,7 +570,35 @@ void load(std::string fileName,std::map<std::string,Media*> *names){
     }
 }
 
+void deleteC(std::string first, std::string second, std::map<std::string,Media*> *names){
 
+    std::map<std::string,Media*>::iterator it,it2;
+    std::string classN;
+
+    if(names->find(first)!=names->end() || names->find(second)!=names->end()){  //delete
+        if(names->find(first)!=names->end()){
+            if(names->find(second)!=names->end()){
+                //std::cout << "both exist " << std::endl;
+                it2 = names->find(second);
+                classN = get_typename(*(it2->second));
+                if(classN.compare("combMedia")==0){
+                    //std::cout << "prepare to delete"<<std::endl;
+                    it = names->find(first);
+                    Media *head = it2->second;
+                    head->removeMedia(it->second);
+                }
+                else
+                    std::cout << second << " isn't a combo type"<<std::endl;
+            }
+            else
+                std::cout << second << " doesn't exist"<< std::endl;
+        }
+        else
+            std::cout << first << " doesn't exist"<< std::endl;
+    }
+    else
+        std::cout << " both don't exist"<< std::endl;
+}
 
 void Cmd::run(){
 
@@ -705,7 +650,8 @@ void Cmd::run(){
                 //std::cout << "Action is delete" <<std::endl;
                 //std::cout << "================" <<std::endl;
                 if(cmds.size()==4 && cmds.at(2).compare("from")==0){    //delete a from combo
-
+                        //std::cout << "start" << std::endl;
+                        deleteC(cmds.at(1),cmds.at(3),&names);
                 }
                 else if(cmds.size()==2){    //delete A
                     if(names.find(cmds.at(1))!=names.end() ){
